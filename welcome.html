@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Datang!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <style>
+        /* Gaya khusus untuk halaman welcome */
+        .welcome-page-body {
+            background: linear-gradient(135deg, #004F9F 0%, #ED1C24 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Re-use particle animation */
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes moveParticles {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100vw, 100vh); }
+        }
+
+        .welcome-page-body::before,
+        .welcome-page-body::after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            filter: blur(10px);
+            animation: fadeInOut 5s ease-in-out infinite alternate,
+                       moveParticles 25s linear infinite;
+            z-index: -1;
+        }
+
+        .welcome-page-body::before {
+            width: 8px; height: 8px; top: 15%; left: 25%; animation-delay: 0s, 0s;
+        }
+
+        .welcome-page-body::after {
+            width: 12px; height: 12px; bottom: 10%; right: 20%; animation-delay: 2s, 12s;
+        }
+
+        .welcome-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 60px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4),
+                        0 0 0 3px rgba(255,255,255,0.5) inset,
+                        0 0 0 10px rgba(0,79,159,0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 600px;
+            margin: 20px;
+            animation: fadeInScaleUp 0.8s ease-out forwards; /* Re-use animation */
+        }
+
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .welcome-container h1 {
+            color: #004F9F;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .welcome-container p {
+            color: #ED1C24;
+            font-size: 1.6em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .welcome-container .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #004F9F;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1.5s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .welcome-container {
+                padding: 30px 40px;
+            }
+            .welcome-container h1 {
+                font-size: 2.5em;
+            }
+            .welcome-container p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body class="welcome-page-body">
+    <div class="welcome-container">
+        <h1 id="welcomeMessage">Selamat Datang!</h1>
+        <div class="loader"></div>
+        <p>Mengarahkan Anda ke halaman utama...</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('loggedInUserName') || 'Pengguna Indomaret';
+            
+            document.getElementById('welcomeMessage').textContent = `Selamat Datang, ${userName}!`;
+
+            setTimeout(() => {
+                window.location.href = 'index.html'; // *** PERUBAHAN DI SINI ***
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

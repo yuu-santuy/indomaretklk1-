@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+
+    <header class="header login-header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+        </div>
+    </header>
+
+    <main class="login-split-content">
+        <div class="login-form-area">
+            <div class="login-container">
+                <h2>Masuk ke Akun Anda</h2>
+                <form class="login-form" id="loginForm">
+                    <div class="input-group float-label">
+                        <input type="text" id="emailOrPhone" name="emailOrPhone" required>
+                        <label for="emailOrPhone">Email atau Nomor HP</label>
+                    </div>
+                    <div class="input-group float-label">
+                        <input type="password" id="password" name="password" required>
+                        <label for="password">Kata Sandi</label>
+                    </div>
+                    <button type="submit">Masuk</button>
+                </form>
+                <div class="signup-link">
+                    Belum punya akun? <a href="register.html">Daftar Sekarang</a>
+                </div>
+            </div>
+        </div>
+        <div class="login-image-area">
+            <div class="image-overlay">
+                <h3>Belanja Praktis, Hidup Hemat!</h3>
+                <p>Nikmati kemudahan berbelanja online di Indomaret.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const loginContainer = document.querySelector('.login-container');
+        if (loginContainer) {
+            loginContainer.addEventListener('mousemove', (e) => {
+                const rect = loginContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * 3;
+                const rotateY = ((x - centerX) / centerX) * -3;
+
+                loginContainer.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    scale(1)
+                `;
+            });
+
+            loginContainer.addEventListener('mouseleave', () => {
+                loginContainer.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        }
+
+        const loginForm = document.getElementById('loginForm');
+
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const emailOrPhone = document.getElementById('emailOrPhone').value;
+                const password = document.getElementById('password').value;
+
+                if (!emailOrPhone || !password) {
+                    alert('Mohon masukkan Email/Nomor HP dan Kata Sandi Anda!');
+                    return;
+                }
+
+                // Di sini Anda bisa menambahkan logika validasi password yang lebih kompleks jika ada
+                // Untuk simulasi, kita hanya cek input tidak kosong
+
+                // Tidak perlu lagi alert di sini, karena welcome.html akan menanganinya
+                
+                setTimeout(() => {
+                    // Redirect ke halaman sambutan
+                    window.location.href = 'welcome.html'; 
+                }, 1000); // Redirect setelah 1 detik
+            });
+        }
+    </script>
+
+</body>
+</html>
