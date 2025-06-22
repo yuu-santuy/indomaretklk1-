@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun Baru - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css"> </head>
+<body class="login-page">
+
+    <header class="header login-header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+        </div>
+    </header>
+
+    <main class="login-split-content">
+        <div class="login-form-area">
+            <div class="login-container">
+                <h2>Daftar Akun Baru</h2>
+                <form class="login-form" id="registerForm">
+                    <div class="input-group float-label">
+                        <input type="text" id="regEmailOrPhone" name="regEmailOrPhone" required>
+                        <label for="regEmailOrPhone">Email atau Nomor HP</label>
+                    </div>
+                    <div class="input-group float-label">
+                        <input type="password" id="regPassword" name="regPassword" required>
+                        <label for="regPassword">Buat Kata Sandi</label>
+                    </div>
+                    <div class="input-group float-label">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <label for="confirmPassword">Konfirmasi Kata Sandi</label>
+                    </div>
+                    <button type="submit">Daftar</button>
+                </form>
+                <div class="signup-link">
+                    Sudah punya akun? <a href="login.html">Masuk Sekarang</a>
+                </div>
+            </div>
+        </div>
+        <div class="login-image-area">
+            <div class="image-overlay">
+                <h3>Gabung Sekarang, Nikmati Promo Spesial!</h3>
+                <p>Dapatkan berbagai keuntungan sebagai member Indomaret Online.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const registerForm = document.getElementById('registerForm');
+
+        if (registerForm) {
+            registerForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const regEmailOrPhone = document.getElementById('regEmailOrPhone').value;
+                const regPassword = document.getElementById('regPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (!regEmailOrPhone || !regPassword || !confirmPassword) {
+                    alert('Semua kolom harus diisi!');
+                    return;
+                }
+
+                if (regPassword !== confirmPassword) {
+                    alert('Konfirmasi kata sandi tidak cocok!');
+                    return;
+                }
+
+                // Ambil data pengguna yang sudah ada dari localStorage
+                let users = JSON.parse(localStorage.getItem('indomaretUsers')) || [];
+
+                // Cek apakah email/nomor HP sudah terdaftar
+                const userExists = users.some(user => user.emailOrPhone === regEmailOrPhone);
+                if (userExists) {
+                    alert('Email atau Nomor HP ini sudah terdaftar. Silakan gunakan yang lain atau masuk.');
+                    return;
+                }
+
+                // Tambahkan pengguna baru
+                users.push({
+                    emailOrPhone: regEmailOrPhone,
+                    password: regPassword // Dalam aplikasi nyata, password harus di-hash!
+                });
+
+                // Simpan kembali ke localStorage
+                localStorage.setItem('indomaretUsers', JSON.stringify(users));
+
+                alert('Registrasi Berhasil! Silakan masuk dengan akun Anda.');
+                window.location.href = 'login.html'; // Arahkan ke halaman login
+            });
+        }
+    </script>
+
+</body>
+</html>

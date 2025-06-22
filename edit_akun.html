@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Akun - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .main-content {
+            padding: 40px 0;
+            text-align: center;
+        }
+        .main-content h1 {
+            color: #004F9F;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        .main-content p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .edit-form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .edit-form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        .edit-form-container input[type="text"],
+        .edit-form-container input[type="email"],
+        .edit-form-container input[type="tel"],
+        .edit-form-container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .edit-form-container button {
+            background-color: #ED1C24;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .edit-form-container button:hover {
+            background-color: #C00F17;
+        }
+    </style>
+    <script>
+        (function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                alert('Anda harus login untuk mengakses halaman ini.');
+                window.location.href = 'login.html';
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="menuOverlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="sidebarMenu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+        <h2>Menu Indomaret</h2>
+        <a href="index.html">🏠 Beranda</a>
+        <a href="kode_penukaran.html">📦 Kode Penukaran</a>
+        <a href="info_layanan.html">ℹ️ Info Layanan</a>
+        <a href="bantuan.html">❓ Bantuan</a>
+        <a href="keranjang_belanja.html">🛒 Keranjang Belanja</a>
+        <a href="promosi.html">🎁 Promo & Diskon</a>
+        <a href="produk_favorit.html">⭐ Produk Favorit</a>
+        <a href="lokasi_toko.html">📍 Lokasi Toko</a>
+
+        <div class="sidebar-section-divider"></div>
+        <h2 class="sidebar-section-title">Pengaturan</h2>
+        <a href="edit_akun.html">⚙️ Edit Akun</a>
+        <a href="#">🎨 Tema</a>
+        <a href="#">🌐 Bahasa</a>
+        <a href="login.html" onclick="logout()">➡️ Logout</a>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+            <nav class="nav-icons">
+                <a href="login.html">
+                    👤 Akun
+                </a>
+                <a href="#" class="menu-icon" onclick="openMenu()">
+                    ☰ Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" placeholder="Cari pengaturan...">
+            <button type="submit">Cari</button>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <h1>Edit Informasi Akun Anda</h1>
+            <p>Perbarui detail akun Anda seperti nama, email, nomor telepon, atau kata sandi.</p>
+            
+            <div class="edit-form-container">
+                <form id="editAccountForm">
+                    <label for="fullName">Nama Lengkap:</label>
+                    <input type="text" id="fullName" value="Nama Pengguna" required>
+
+                    <label for="accountEmail">Email:</label>
+                    <input type="email" id="accountEmail" value="user@example.com" required>
+
+                    <label for="phoneNumber">Nomor Telepon:</label>
+                    <input type="tel" id="phoneNumber" value="081234567890" required>
+
+                    <label for="currentPassword">Kata Sandi Saat Ini:</label>
+                    <input type="password" id="currentPassword" placeholder="Masukkan kata sandi saat ini" required>
+
+                    <label for="newPassword">Kata Sandi Baru (kosongkan jika tidak ingin mengubah):</label>
+                    <input type="password" id="newPassword" placeholder="Kata sandi baru">
+
+                    <label for="confirmNewPassword">Konfirmasi Kata Sandi Baru:</label>
+                    <input type="password" id="confirmNewPassword" placeholder="Konfirmasi kata sandi baru">
+
+                    <button type="submit">Simpan Perubahan</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebarMenu").style.width = "250px";
+            document.getElementById("menuOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebarMenu").style.width = "0";
+            document.getElementById("menuOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('loggedInUserName');
+            alert('Anda telah berhasil logout.');
+            window.location.href = 'login.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const loggedInUserName = localStorage.getItem('loggedInUserName');
+            if (loggedInUserName) {
+                // Di sini Anda bisa mengisi nilai default form dengan data pengguna
+                // Untuk simulasi, kita pakai loggedInUserName sebagai email/phone
+                document.getElementById('accountEmail').value = loggedInUserName.includes('@') ? loggedInUserName : '';
+                document.getElementById('phoneNumber').value = !loggedInUserName.includes('@') ? loggedInUserName : '';
+            }
+
+            document.getElementById('editAccountForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+                // --- Simulasi validasi password ---
+                // Dalam aplikasi nyata, Anda akan mengirim currentPassword ke server untuk verifikasi
+                // dan juga hash newPassword sebelum menyimpannya.
+                const users = JSON.parse(localStorage.getItem('indomaretUsers')) || [];
+                const loggedUser = users.find(user => user.emailOrPhone === loggedInUserName);
+
+                if (loggedUser && loggedUser.password !== currentPassword) {
+                    alert('Kata Sandi Saat Ini salah!');
+                    return;
+                }
+
+                if (newPassword && newPassword !== confirmNewPassword) {
+                    alert('Konfirmasi Kata Sandi Baru tidak cocok!');
+                    return;
+                }
+
+                // Update data pengguna (simulasi)
+                if (loggedUser) {
+                    loggedUser.fullName = document.getElementById('fullName').value;
+                    loggedUser.emailOrPhone = document.getElementById('accountEmail').value || document.getElementById('phoneNumber').value;
+                    if (newPassword) {
+                        loggedUser.password = newPassword; // Lagi, dalam nyata ini harus di-hash
+                    }
+                    localStorage.setItem('indomaretUsers', JSON.stringify(users));
+                    localStorage.setItem('loggedInUserName', loggedUser.emailOrPhone); // Update jika email/phone berubah
+                    alert('Profil berhasil diperbarui!');
+                } else {
+                    alert('Terjadi kesalahan saat memperbarui profil.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

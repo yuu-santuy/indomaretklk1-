@@ -1,0 +1,150 @@
+/* info_layanan.css */
+
+/* Konsistensi dengan index.css */
+body {
+    background-color: #f0f2f5; /* Latar belakang sama */
+}
+
+.main-content-info-layanan {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.main-content-info-layanan h1 {
+    color: #ED1C24; /* Warna Indomaret Red */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.main-content-info-layanan p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Gaya Kategori Layanan */
+.service-category {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: left; /* Teks di dalam kategori rata kiri */
+}
+
+.service-category h2 {
+    color: #004F9F; /* Warna Biru Indomaret */
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0; /* Garis bawah kategori */
+}
+
+/* Gaya Grid Item Layanan */
+.service-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsif */
+    gap: 30px; /* Jarak antar item layanan */
+}
+
+.service-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.service-item h3 {
+    color: #333;
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.service-item ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.service-item ul li {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 1em;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+}
+
+.service-item ul li::before {
+    content: '✅'; /* Simbol centang */
+    margin-right: 10px;
+    font-size: 0.8em;
+}
+
+.service-item p {
+    color: #666;
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.service-button {
+    display: inline-block;
+    background-color: #ED1C24; /* Merah Indomaret */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.service-button:hover {
+    background-color: #C00F17; /* Merah lebih gelap saat hover */
+}
+
+/* Media Queries untuk responsivitas */
+@media (max-width: 768px) {
+    .service-category {
+        padding: 20px;
+        margin: 0 20px 30px 20px;
+    }
+
+    .service-category h2 {
+        font-size: 1.8em;
+    }
+
+    .service-items-grid {
+        grid-template-columns: 1fr; /* Satu kolom di layar kecil */
+    }
+
+    .search-bar input {
+        width: 80%;
+    }
+
+    .search-bar button {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 80%;
+    }
+
+    .search-bar .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-content-info-layanan h1 {
+        font-size: 2em;
+    }
+}

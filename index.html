@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indomaret Online (Contoh)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+
+    <script>
+        // --- BAGIAN PENTING: CEK STATUS LOGIN SAAT HALAMAN DIMUAT ---
+        // Panggil fungsi ini sebelum konten halaman dimuat
+        (function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                alert('Anda harus login untuk mengakses halaman ini.');
+                window.location.href = 'login.html';
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="menuOverlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="sidebarMenu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+        <h2>Menu Indomaret</h2>
+        <a href="index.html">🏠 Beranda</a>
+        <a href="kode_penukaran.html">📦 Kode Penukaran</a>
+        <a href="info_layanan.html">ℹ️ Info Layanan</a>
+        <a href="bantuan.html">❓ Bantuan</a>
+        <a href="keranjang_belanja.html">🛒 Keranjang Belanja</a>
+        <a href="promosi.html">🎁 Promo & Diskon</a>
+        <a href="produk_favorit.html">⭐ Produk Favorit</a>
+        <a href="lokasi_toko.html">📍 Lokasi Toko</a>
+
+        <div class="sidebar-section-divider"></div>
+        <h2 class="sidebar-section-title">Pengaturan</h2>
+        <a href="edit_akun.html">⚙️ Edit Akun</a>
+        <a href="tema.html">🎨 Tema</a>
+        <a href="bahasa.html">🌐 Bahasa</a>
+        <a href="login.html" onclick="logout()">➡️ Logout</a>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+            <nav class="nav-icons">
+                <a href="login.html">
+                    👤 Akun
+                </a>
+               
+                <a href="#" class="menu-icon" onclick="openMenu()">
+                    ☰ Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Cari produk di Indomaret...">
+            <button type="submit">Cari</button>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <h1>Produk Kami</h1>
+            <div class="products-grid" id="productsGrid">
+                </div>
+        </div>
+    </main>
+
+    <div id="productModalOverlay" class="product-modal-overlay" onclick="closeProductModal()">
+        <div class="product-modal-content" onclick="event.stopPropagation()">
+            <span class="close-button" onclick="closeProductModal()">&times;</span>
+            <div class="modal-header-content">
+                <img id="modalProductImage" src="" alt="Product Image">
+                <div class="modal-product-info">
+                    <h2 id="modalProductName"></h2>
+                    <p id="modalProductCategory"></p>
+                    <div id="modalProductRating" class="product-rating">
+                        </div>
+                    <div class="modal-actions">
+                        <button class="add-to-cart-button" id="addToCartBtn">🛒 Tambah ke Keranjang</button>
+                        <button class="buy-now-button" id="buyNowBtn">🛍️ Pesan Sekarang</button>
+                    </div>
+                </div>
+            </div>
+            <p id="modalProductDescription"></p>
+
+            <div class="favorite-icon-container">
+                <i id="favoriteIcon" class="far fa-star favorite-icon" onclick="toggleFavoriteFromModal()"></i>
+            </div>
+
+            <div class="product-comments">
+                <h3>Ulasan Produk</h3>
+                <div id="commentsList">
+                    </div>
+                <div class="add-comment-section">
+                    <h4>Tambahkan Ulasan Anda</h4>
+                    <textarea id="commentInput" placeholder="Tulis komentar Anda di sini..."></textarea>
+                    <div class="rating-input">
+                        <span>Beri Rating:</span>
+                        <i class="far fa-star star-input" data-rating="1"></i>
+                        <i class="far fa-star star-input" data-rating="2"></i>
+                        <i class="far fa-star star-input" data-rating="3"></i>
+                        <i class="far fa-star star-input" data-rating="4"></i>
+                        <i class="far fa-star star-input" data-rating="5"></i>
+                    </div>
+                    <button id="submitCommentBtn">Kirim Ulasan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebarMenu").style.width = "250px";
+            document.getElementById("menuOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebarMenu").style.width = "0";
+            document.getElementById("menuOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUserName');
+            localStorage.setItem('isLoggedIn', 'false'); // Set status login menjadi false
+            window.location.href = 'login.html';
+            alert('Anda telah berhasil logout.');
+        }
+
+        // --- Data Produk ---
+        const products = [
+            {
+                id: 'lays',
+                name: 'Lay\'s Classic Potato Chips',
+                category: 'Makanan Ringan',
+                image: 'lays.jpg',
+                description: 'Keripik kentang klasik Lay\'s yang renyah dengan rasa asin yang sempurna. Cocok untuk camilan kapan saja. Terbuat dari kentang pilihan dan minyak bunga matahari asli. Tanpa pengawet buatan.',
+                rating: 4.5, // Contoh rating
+                comments: [ // Contoh komentar
+                    { user: 'Budi', comment: 'Enak banget, renyah!', rating: 5 },
+                    { user: 'Ani', comment: 'Camilan favorit keluarga.', rating: 4 }
+                ]
+            },
+            {
+                id: 'chitato-beef-bbq',
+                name: 'Chitato Beef BBQ',
+                category: 'Makanan Ringan',
+                image: 'chitato.png',
+                description: 'Keripik kentang Chitato rasa Beef BBQ yang gurih dan lezat. Sensasi rasa daging panggang yang kuat. Irisan kentang bergelombang dengan bumbu melimpah.',
+                rating: 4.0,
+                comments: [
+                    { user: 'Cici', comment: 'Rasa BBQ-nya mantap!', rating: 4 },
+                    { user: 'Dion', comment: 'Selalu jadi pilihan kalau ngumpul.', rating: 4 }
+                ]
+            },
+            {
+                id: 'qtela-original',
+                name: 'Qtela Original Cassava Chips',
+                category: 'Makanan Ringan',
+                image: 'qtela.png',
+                description: 'Keripik singkong Qtela rasa original. Tipis, renyah, dan gurih, cocok untuk dinikmati bersama keluarga. Dibuat dari singkong pilihan.',
+                rating: 3.8,
+                comments: [
+                    { user: 'Fika', comment: 'Lumayan lah buat teman ngopi.', rating: 3 },
+                    { user: 'Gani', comment: 'Renyah tapi agak hambar.', rating: 3 }
+                ]
+            },
+            {
+                id: 'qtela-tempe',
+                name: 'Qtela Tempe Original',
+                category: 'Makanan Ringan',
+                image: 'tempe.png',
+                description: 'Keripik tempe Qtela rasa original. Camilan sehat dan renyah dengan kandungan protein dari tempe pilihan. Alternatif sehat untuk camilan sehari-hari.',
+                rating: 4.2,
+                comments: [
+                    { user: 'Hana', comment: 'Suka banget keripik tempenya, gurih!', rating: 5 },
+                    { user: 'Indra', comment: 'Sehat dan enak, recommended.', rating: 4 }
+                ]
+            },
+            {
+                id: 'coca-cola',
+                name: 'Coca-Cola 390ml',
+                category: 'Minuman',
+                image: 'ccla.png',
+                description: 'Minuman bersoda Coca-Cola kemasan botol 390ml. Rasa klasik yang menyegarkan untuk setiap momen. Cocok diminum dingin.',
+                rating: 4.7,
+                comments: [
+                    { user: 'Joko', comment: 'Penyegar dahaga terbaik!', rating: 5 },
+                    { user: 'Kiki', comment: 'Selalu ada di kulkas.', rating: 5 }
+                ]
+            },
+            {
+                id: 'nutriboost-strawberry',
+                name: 'Nutriboost Strawberry 180ml',
+                category: 'Minuman',
+                image: 'ntbst.png',
+                description: 'Minuman susu fermentasi Nutriboost rasa stroberi. Kaya akan serat dan vitamin untuk menjaga kesehatan pencernaan. Rasa stroberi yang manis dan segar.',
+                rating: 4.1,
+                comments: [
+                    { user: 'Lina', comment: 'Segar dan lumayan mengenyangkan.', rating: 4 },
+                    { user: 'Miko', comment: 'Anak saya suka sekali.', rating: 4 }
+                ]
+            },
+            {
+                id: 'nutriboost-orange',
+                name: 'Nutriboost Orange 180ml',
+                category: 'Minuman',
+                image: 'ntbst2.png',
+                description: 'Minuman susu fermentasi Nutriboost rasa jeruk. Sumber vitamin C dan serat untuk daya tahan tubuh. Rasa jeruk alami yang nikmat.',
+                rating: 4.3,
+                comments: [
+                    { user: 'Nana', comment: 'Manisnya pas, ada rasa jeruknya.', rating: 4 },
+                    { user: 'Oman', comment: 'Minuman sehat untuk keluarga.', rating: 5 }
+                ]
+            }
+        ];
+
+        const productsGrid = document.getElementById('productsGrid');
+        const searchInput = document.getElementById('searchInput');
+        const modalOverlay = document.getElementById('productModalOverlay');
+        const modalProductImage = document.getElementById('modalProductImage');
+        const modalProductName = document.getElementById('modalProductName');
+        const modalProductCategory = document.getElementById('modalProductCategory');
+        const modalProductDescription = document.getElementById('modalProductDescription');
+        const modalProductRating = document.getElementById('modalProductRating');
+        const commentsList = document.getElementById('commentsList');
+        const commentInput = document.getElementById('commentInput');
+        const submitCommentBtn = document.getElementById('submitCommentBtn');
+        const ratingInputStars = document.querySelectorAll('.star-input');
+        const favoriteIcon = document.getElementById('favoriteIcon');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const buyNowBtn = document.getElementById('buyNowBtn');
+
+        let currentProduct = null; // Menyimpan produk yang sedang ditampilkan di modal
+
+        // Fungsi untuk menampilkan produk
+        function displayProducts(productsToDisplay) {
+            productsGrid.innerHTML = ''; // Kosongkan grid sebelum menampilkan
+            if (productsToDisplay.length === 0) {
+                productsGrid.innerHTML = '<p>Produk tidak ditemukan.</p>';
+                return;
+            }
+            productsToDisplay.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" onclick="openProductModal('${product.id}')">
+                    <div class="card-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.category}</p>
+                        <div class="product-rating">${renderStars(product.rating)}</div>
+                        <i class="${isFavorite(product.id) ? 'fas' : 'far'} fa-star favorite-icon-card" onclick="event.stopPropagation(); toggleFavorite('${product.id}')"></i>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Fungsi untuk mencari produk
+        function searchProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredProducts = products.filter(product =>
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+            displayProducts(filteredProducts);
+        }
+
+        // Fungsi untuk merender bintang rating
+        function renderStars(rating) {
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    starsHtml += '<i class="fas fa-star filled"></i>'; // Bintang penuh
+                } else if (i - 0.5 === rating) {
+                    starsHtml += '<i class="fas fa-star-half-alt filled"></i>'; // Bintang setengah
+                } else {
+                    starsHtml += '<i class="far fa-star"></i>'; // Bintang kosong
+                }
+            }
+            return starsHtml;
+        }
+
+        // Fungsi untuk menampilkan komentar
+        function displayComments(comments) {
+            commentsList.innerHTML = ''; // Kosongkan daftar komentar
+            if (comments && comments.length > 0) {
+                comments.forEach(comment => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment-item');
+                    commentDiv.innerHTML = `
+                        <strong>${comment.user}</strong>
+                        <div class="comment-rating">${renderStars(comment.rating)}</div>
+                        <p>${comment.comment}</p>
+                    `;
+                    commentsList.appendChild(commentDiv);
+                });
+            } else {
+                commentsList.innerHTML = '<p>Belum ada ulasan untuk produk ini.</p>';
+            }
+        }
+
+        let selectedRating = 0; // Rating yang dipilih oleh pengguna saat menambahkan komentar
+
+        // Event listener untuk input rating bintang
+        ratingInputStars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.dataset.rating);
+                ratingInputStars.forEach((s, index) => {
+                    if (index < selectedRating) {
+                        s.classList.remove('far');
+                        s.classList.add('fas', 'filled');
+                    } else {
+                        s.classList.remove('fas', 'filled');
+                        s.classList.add('far');
+                    }
+                });
+            });
+        });
+
+        // Event listener untuk submit komentar
+        submitCommentBtn.addEventListener('click', () => {
+            const commentText = commentInput.value.trim();
+            if (commentText === '' || selectedRating === 0) {
+                alert('Mohon masukkan komentar dan berikan rating!');
+                return;
+            }
+
+            const newComment = {
+                user: localStorage.getItem('loggedInUserName') || 'Pengguna', // Ambil nama pengguna dari localStorage
+                comment: commentText,
+                rating: selectedRating
+            };
+
+            // Tambahkan komentar ke produk yang sedang aktif (simulasi)
+            if (currentProduct) {
+                if (!currentProduct.comments) {
+                    currentProduct.comments = [];
+                }
+                currentProduct.comments.push(newComment);
+                displayComments(currentProduct.comments); // Perbarui tampilan komentar
+
+                // Reset input
+                commentInput.value = '';
+                selectedRating = 0;
+                ratingInputStars.forEach(s => {
+                    s.classList.remove('fas', 'filled');
+                    s.classList.add('far');
+                });
+
+                // Perbarui rating rata-rata produk (opsional, jika ingin dihitung ulang)
+                const totalRating = currentProduct.comments.reduce((sum, c) => sum + c.rating, 0);
+                currentProduct.rating = totalRating / currentProduct.comments.length;
+                modalProductRating.innerHTML = renderStars(currentProduct.rating);
+                displayProducts(products); // Perbarui tampilan di grid utama
+            }
+        });
+
+
+        // Fungsi untuk membuka modal detail produk
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                currentProduct = product; // Set produk yang sedang aktif
+                modalProductImage.src = product.image;
+                modalProductImage.alt = product.name;
+                modalProductName.textContent = product.name;
+                modalProductCategory.textContent = product.category;
+                modalProductDescription.textContent = product.description;
+                modalProductRating.innerHTML = renderStars(product.rating); // Tampilkan rating
+                displayComments(product.comments); // Tampilkan komentar
+
+                // Reset input komentar dan rating di modal setiap kali dibuka
+                commentInput.value = '';
+                selectedRating = 0;
+                ratingInputStars.forEach(s => {
+                    s.classList.remove('fas', 'filled');
+                    s.classList.add('far');
+                });
+
+                // Set ikon favorit di modal
+                if (isFavorite(product.id)) {
+                    favoriteIcon.classList.remove('far');
+                    favoriteIcon.classList.add('fas', 'favorited');
+                } else {
+                    favoriteIcon.classList.remove('fas', 'favorited');
+                    favoriteIcon.classList.add('far');
+                }
+
+                // Event listener untuk tombol "Tambah ke Keranjang"
+                addToCartBtn.onclick = () => {
+                    alert(`Menambahkan "${product.name}" ke keranjang! (Simulasi)`);
+                };
+
+                // Event listener untuk tombol "Pesan Sekarang"
+                buyNowBtn.onclick = () => {
+                    alert(`Memesan "${product.name}" sekarang! (Simulasi)`);
+                };
+
+                modalOverlay.style.display = 'flex'; // Tampilkan modal
+                document.body.style.overflow = 'hidden'; // Nonaktifkan scroll body
+            }
+        }
+
+        // Fungsi untuk menutup modal detail produk
+        function closeProductModal() {
+            modalOverlay.style.display = 'none'; // Sembunyikan modal
+            document.body.style.overflow = 'auto'; // Aktifkan kembali scroll body
+            currentProduct = null; // Reset produk yang sedang aktif
+        }
+
+        // --- Fitur Favorit ---
+        function getFavorites() {
+            const favorites = localStorage.getItem('favoriteProducts');
+            return favorites ? JSON.parse(favorites) : [];
+        }
+
+        function saveFavorites(favorites) {
+            localStorage.setItem('favoriteProducts', JSON.stringify(favorites));
+        }
+
+        function isFavorite(productId) {
+            const favorites = getFavorites();
+            return favorites.some(item => item.id === productId);
+        }
+
+        function toggleFavorite(productId) {
+            let favorites = getFavorites();
+            const product = products.find(p => p.id === productId);
+
+            if (!product) return; // Pastikan produk ada
+
+            if (isFavorite(productId)) {
+                // Hapus dari favorit
+                favorites = favorites.filter(item => item.id !== productId);
+                alert(`${product.name} telah dihapus dari favorit.`);
+            } else {
+                // Tambahkan ke favorit
+                favorites.push({
+                    id: product.id,
+                    name: product.name,
+                    imageUrl: product.image,
+                    price: Math.floor(Math.random() * (50000 - 5000 + 1)) + 5000 // Harga simulasi
+                });
+                alert(`${product.name} telah ditambahkan ke favorit.`);
+            }
+            saveFavorites(favorites);
+            displayProducts(products); // Perbarui tampilan grid kartu
+            // Perbarui ikon favorit di modal jika modal sedang terbuka
+            if (currentProduct && currentProduct.id === productId) {
+                if (isFavorite(productId)) {
+                    favoriteIcon.classList.remove('far');
+                    favoriteIcon.classList.add('fas', 'favorited');
+                } else {
+                    favoriteIcon.classList.remove('fas', 'favorited');
+                    favoriteIcon.classList.add('far');
+                }
+            }
+        }
+
+        // Fungsi untuk toggle favorit dari dalam modal (menggunakan currentProduct)
+        function toggleFavoriteFromModal() {
+            if (currentProduct) {
+                toggleFavorite(currentProduct.id);
+            }
+        }
+
+        // Tampilkan semua produk saat halaman pertama kali dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProducts(products);
+        });
+    </script>
+</body>
+</html>

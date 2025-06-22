@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Tema - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .main-content {
+            padding: 40px 0;
+            text-align: center;
+        }
+        .main-content h1 {
+            color: #004F9F;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        .main-content p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .theme-options-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .theme-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .theme-option:hover {
+            background-color: #f9f9f9;
+            border-color: #ccc;
+        }
+        .theme-option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.5); /* Perbesar radio button */
+        }
+        .theme-option label {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            flex-grow: 1;
+        }
+        .theme-preview {
+            width: 80px;
+            height: 40px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .theme-preview.light-theme {
+            background: linear-gradient(to right, #ffffff, #f0f2f5);
+        }
+        .theme-preview.dark-theme {
+            background: linear-gradient(to right, #333, #111);
+        }
+        .theme-preview.colorful-theme {
+            background: linear-gradient(to right, #004F9F, #ED1C24, #FFD100);
+        }
+        .save-theme-button {
+            background-color: #004F9F;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .save-theme-button:hover {
+            background-color: #003e80;
+        }
+    </style>
+    <script>
+        (function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                alert('Anda harus login untuk mengakses halaman ini.');
+                window.location.href = 'login.html';
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="menuOverlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="sidebarMenu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+        <h2>Menu Indomaret</h2>
+        <a href="index.html">🏠 Beranda</a>
+        <a href="kode_penukaran.html">📦 Kode Penukaran</a>
+        <a href="info_layanan.html">ℹ️ Info Layanan</a>
+        <a href="bantuan.html">❓ Bantuan</a>
+        <a href="keranjang_belanja.html">🛒 Keranjang Belanja</a>
+        <a href="promosi.html">🎁 Promo & Diskon</a>
+        <a href="produk_favorit.html">⭐ Produk Favorit</a>
+        <a href="lokasi_toko.html">📍 Lokasi Toko</a>
+
+        <div class="sidebar-section-divider"></div>
+        <h2 class="sidebar-section-title">Pengaturan</h2>
+        <a href="edit_akun.html">⚙️ Edit Akun</a>
+        <a href="tema.html">🎨 Tema</a>
+        <a href="bahasa.html">🌐 Bahasa</a>
+        <a href="login.html" onclick="logout()">➡️ Logout</a>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+            <nav class="nav-icons">
+                <a href="login.html">
+                    👤 Akun
+                </a>
+                <a href="#" class="menu-icon" onclick="openMenu()">
+                    ☰ Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" placeholder="Cari pengaturan tema...">
+            <button type="submit">Cari</button>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <h1>Pilih Tema Aplikasi</h1>
+            <p>Sesuaikan tampilan aplikasi Indomaret Online sesuai preferensi Anda.</p>
+            
+            <div class="theme-options-container">
+                <div class="theme-option" onclick="document.getElementById('lightTheme').checked = true;">
+                    <input type="radio" id="lightTheme" name="appTheme" value="light" checked>
+                    <label for="lightTheme">Tema Terang</label>
+                    <div class="theme-preview light-theme"></div>
+                </div>
+                
+                <div class="theme-option" onclick="document.getElementById('darkTheme').checked = true;">
+                    <input type="radio" id="darkTheme" name="appTheme" value="dark">
+                    <label for="darkTheme">Tema Gelap</label>
+                    <div class="theme-preview dark-theme"></div>
+                </div>
+
+                <div class="theme-option" onclick="document.getElementById('colorfulTheme').checked = true;">
+                    <input type="radio" id="colorfulTheme" name="appTheme" value="colorful">
+                    <label for="colorfulTheme">Tema Warna-warni</label>
+                    <div class="theme-preview colorful-theme"></div>
+                </div>
+
+                <button class="save-theme-button" onclick="saveThemeSettings()">Simpan Tema</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebarMenu").style.width = "250px";
+            document.getElementById("menuOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebarMenu").style.width = "0";
+            document.getElementById("menuOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('loggedInUserName');
+            alert('Anda telah berhasil logout.');
+            window.location.href = 'login.html';
+        }
+
+        // Fungsi untuk menyimpan pengaturan tema (simulasi)
+        function saveThemeSettings() {
+            const selectedTheme = document.querySelector('input[name="appTheme"]:checked').value;
+            localStorage.setItem('selectedTheme', selectedTheme);
+            alert(`Tema "${selectedTheme}" telah disimpan.`);
+            // Dalam aplikasi nyata, Anda akan menerapkan tema secara dinamis di sini atau saat halaman dimuat
+            // Misalnya: document.body.className = selectedTheme + '-theme';
+        }
+
+        // Memuat tema yang tersimpan saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme) {
+                document.getElementById(`${savedTheme}Theme`).checked = true;
+            }
+        });
+    </script>
+</body>
+</html>

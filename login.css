@@ -1,0 +1,613 @@
+/* CSS Umum & Reset Dasar */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f8f9fa;
+    color: #343a40;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+/* Header - Modern dengan Warna Brand (untuk halaman utama) */
+.header {
+    background: linear-gradient(to right, #004F9F 0%, #004F9F 33%, #ED1C24 33%, #ED1C24 66%, #FFD100 66%, #FFD100 100%);
+    padding: 15px 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo img {
+    height: 45px;
+    display: block;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-icons a {
+    text-decoration: none;
+    color: #004F9F;
+    font-weight: 500;
+    font-size: 1.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-icons a .icon {
+    font-size: 1.3em;
+    color: #ED1C24;
+}
+
+.nav-icons a:hover {
+    color: #ED1C24;
+    transform: translateY(-2px);
+}
+
+/* Hero Section (Pengganti search bar dan main-content awal) */
+.hero-section {
+    background: #ffffff;
+    padding: 80px 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+
+.hero-section h1 {
+    color: #004F9F;
+    font-size: 3em;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    color: #6c757d;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Search Bar di dalam Hero Section */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 15px 25px;
+    border: none;
+    font-size: 1.1em;
+    outline: none;
+    color: #343a40;
+}
+
+.search-input::placeholder {
+    color: #adb5bd;
+}
+
+.search-button {
+    background-color: #ED1C24;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: -60px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.search-button:hover {
+    background-color: #C00F17;
+    transform: scale(1.02);
+}
+
+/* Main Content - Grid Produk */
+.main-content {
+    padding: 40px 0 60px 0;
+    text-align: center;
+}
+
+.main-content h2 {
+    color: #004F9F;
+    font-size: 2.2em;
+    margin-bottom: 35px;
+    font-weight: 700;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    color: #343a40;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    color: #ED1C24;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.product-card .add-to-cart {
+    background-color: #004F9F;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+.product-card .add-to-cart:hover {
+    background-color: #003a7a;
+}
+
+.more-info {
+    margin-top: 50px;
+    font-size: 1.1em;
+    color: #6c757d;
+}
+
+/* Footer - Elegan dan Minimalis */
+.footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    padding: 30px 0;
+    text-align: center;
+    font-size: 0.95em;
+}
+
+.footer-links {
+    margin-top: 15px;
+}
+
+.footer-links a {
+    color: #adb5bd;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+
+/* --- Gaya Khusus Halaman Login: LEVEL "ULTRA-WAH" (Disesuaikan) --- */
+
+/* Animasi untuk partikel */
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+@keyframes moveParticles {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(100vw, 100vh); }
+}
+
+body.login-page {
+    background: linear-gradient(135deg, #004F9F 0%, #ED1C24 100%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Particle animation background (perlu ditambahkan elemen particle di HTML jika ingin banyak) */
+/* Contoh sederhana dengan pseudo-element untuk satu atau dua partikel saja */
+body.login-page::before,
+body.login-page::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    filter: blur(10px); /* Kurangi blur agar terlihat seperti partikel */
+    animation: fadeInOut 5s ease-in-out infinite alternate,
+               moveParticles 25s linear infinite; /* Animasi lebih lambat */
+    z-index: -1;
+}
+
+body.login-page::before {
+    width: 8px; height: 8px; top: 15%; left: 25%; animation-delay: 0s, 0s;
+}
+
+body.login-page::after {
+    width: 12px; height: 12px; bottom: 10%; right: 20%; animation-delay: 2s, 12s;
+}
+
+
+/* Header Halaman Login */
+.header.login-header {
+    position: relative;
+    background-color: rgba(0, 79, 159, 0.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    padding: 15px 0;
+    z-index: 100;
+}
+
+.header.login-header .logo img {
+    height: 40px;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.7));
+}
+
+.header.login-header .header-content {
+    justify-content: center;
+}
+
+/* Konten Utama Halaman Login dengan Split Layout */
+.login-split-content {
+    display: flex;
+    flex-grow: 100;
+    align-items: center; /* Ubah align-items jadi center agar form berada di tengah vertikal */
+    justify-content: center; /* Tambahkan justify-content center agar form berada di tengah horizontal */
+    overflow: hidden;
+    position: relative;
+ }
+
+.login-form-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Kurangi padding area form */
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+.login-image-area {
+    flex: 1;
+    background: none;
+    /* GANTI URL GAMBAR DI ATAS DENGAN GAMBAR ASLI ANDA! */
+    background-image: url('#.jpg'); /* Menggunakan logo Indomaret sebagai placeholder sementara */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    animation: panImage 60s linear infinite alternate;
+}
+
+@keyframes panImage {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+.image-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px; /* Kurangi padding overlay */
+    border-radius: 12px; /* Kurangi border-radius */
+    text-align: center;
+    max-width: 80%; /* Kurangi max-width */
+    opacity: 0;
+    transform: translateY(20px) scale(0.98); /* Kurangi transform awal */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3); /* Kurangi box-shadow */
+}
+
+.login-image-area:hover .image-overlay {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.image-overlay h3 {
+    font-size: 2.2em; /* Ukuran h3 sedikit kecil */
+    margin-bottom: 10px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.image-overlay p {
+    font-size: 1.1em; /* Ukuran p sedikit kecil */
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+
+/* --- Animasi Masuk Form Login --- */
+@keyframes fadeInScaleUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.95); /* Sedikit naik dan skala mendekati 1 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.login-container {
+    max-width: 420px; /* LEBIH KECIL DARI SEBELUMNYA */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 18px; /* Kembalikan ke yang lebih standar */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), /* Box-shadow sedikit dikurangi */
+                0 0 0 2px rgba(255,255,255,0.4) inset,
+                0 0 0 8px rgba(0,79,159,0.1); /* Glow sedikit dikurangi */
+    padding: 40px; /* PADDING DIKURANGI */
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(8px); /* Blur sedikit dikurangi */
+    -webkit-backdrop-filter: blur(8px);
+    
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+    animation: fadeInScaleUp 0.7s ease-out forwards; /* Durasi animasi sedikit dikurangi */
+    animation-delay: 0.4s; /* Penundaan sedikit dikurangi */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transisi lebih cepat */
+}
+
+/* Efek Paralaks Ringan pada Form (Javascript di login.html) */
+.login-container:hover {
+    /* Transformasi saat hover dikendalikan oleh JS, jadi ini hanya untuk fallback jika JS mati */
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.005); /* Efek skala hover lebih subtle */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4),
+                0 0 0 3px rgba(255,255,255,0.5) inset,
+                0 0 0 10px rgba(0,79,159,0.2);
+}
+
+.login-container h2 {
+    color: #004F9F;
+    margin-bottom: 30px; /* Jarak judul dikurangi */
+    font-size: 2.4em; /* JUDUL DIKECILKAN */
+    font-weight: 700;
+    letter-spacing: -0.5px; /* Sedikit dilonggarkan */
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+
+/* Float Label Input Group */
+.input-group.float-label {
+    position: relative;
+    margin-bottom: 30px; /* Jarak antar input group dikurangi */
+}
+
+.input-group.float-label label {
+    position: absolute;
+    top: 15px; /* Posisi awal label disesuaikan */
+    left: 14px; /* Posisi awal label disesuaikan */
+    color: #6c757d;
+    font-size: 1em; /* Ukuran font label sedikit kecil */
+    pointer-events: none;
+    transition: all 0.25s ease-out; /* Transisi lebih cepat */
+    transform-origin: left top;
+}
+
+.input-group.float-label input {
+    width: calc(100% - 28px); /* Padding disesuaikan */
+    padding: 15px 14px 10px 14px; /* PADDING INPUT DIKURANGI */
+    border: none;
+    border-bottom: 2px solid #e9ecef;
+    border-radius: 0;
+    font-size: 1.1em; /* UKURAN FONT INPUT DIKECILKAN */
+    outline: none;
+    background-color: transparent;
+    transition: border-color 0.25s ease, background-color 0.25s ease; /* Transisi lebih cepat */
+}
+
+/* Saat input fokus atau ada isinya */
+.input-group.float-label input:focus + label,
+.input-group.float-label input:not(:placeholder-shown) + label {
+    top: 0px;
+    font-size: 0.8em; /* Kecilkan ukuran label lebih lagi */
+    color: #004F9F;
+    transform: translateY(-8px);
+}
+
+.input-group.float-label input:focus {
+    border-color: #ED1C24;
+    background-color: rgba(255, 255, 255, 0.9); /* Sedikit background saat fokus */
+    box-shadow: 0 1px 6px rgba(0,0,0,0.03); /* Bayangan lebih lembut saat fokus */
+}
+
+.login-form button {
+    width: 100%;
+    padding: 16px; /* PADDING TOMBOL DIKURANGI */
+    background: linear-gradient(to right, #ED1C24, #C00F17);
+    color: #fff;
+    border: none;
+    border-radius: 10px; /* Kembalikan ke 10px */
+    font-size: 1.2em; /* FONT TOMBOL DIKECILKAN */
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(237,28,36,0.3);
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease; /* Transisi lebih cepat */
+    position: relative;
+    overflow: hidden;
+}
+
+.login-form button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Kilau mulai lebih dekat */
+    width: 40%; /* Kilau lebih sempit */
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: skewX(-30deg);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); /* Transisi lebih cepat */
+}
+
+.login-form button:hover {
+    background: linear-gradient(to right, #C00F17, #ED1C24);
+    transform: translateY(-4px); /* Efek naik dikurangi */
+    box-shadow: 0 12px 25px rgba(237,28,36,0.4); /* Bayangan sedikit dikurangi */
+}
+
+.login-form button:hover::after {
+    left: 100%; /* Kilau berakhir lebih dekat */
+}
+
+.login-container .signup-link {
+    margin-top: 30px; /* Jarak dikurangi */
+    font-size: 1em; /* Font dikurangi */
+    color: #6c757d;
+}
+
+.login-container .signup-link a {
+    color: #004F9F;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.login-container .signup-link a:hover {
+    color: #ED1C24;
+    text-decoration: underline;
+}
+
+/* Responsif yang disempurnakan */
+@media (max-width: 992px) {
+    .login-split-content {
+        flex-direction: column;
+    }
+
+    .login-form-area {
+        padding: 15px; /* Padding lebih kecil */
+    }
+
+    .login-image-area {
+        height: 200px; /* Tinggi gambar lebih kecil di tablet */
+        flex: none;
+        background-position: top center;
+        animation: none;
+    }
+
+    .image-overlay {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        background: rgba(0, 0, 0, 0.7);
+        padding: 25px; /* Padding lebih kecil */
+        border-radius: 10px;
+    }
+    .image-overlay h3 {
+        font-size: 1.8em; /* Ukuran h3 lebih kecil */
+    }
+    .image-overlay p {
+        font-size: 0.9em; /* Ukuran p lebih kecil */
+    }
+
+    .login-container {
+        margin: 0 auto;
+        padding: 30px; /* Padding dikurangi */
+        border-radius: 15px; /* Radius lebih kecil */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.2) inset;
+        backdrop-filter: blur(4px); /* Blur dikurangi */
+        -webkit-backdrop-filter: blur(4px);
+    }
+    .login-container h2 {
+        font-size: 2em;
+        margin-bottom: 25px;
+    }
+    .input-group.float-label {
+        margin-bottom: 25px;
+    }
+    .input-group.float-label input {
+        font-size: 1em;
+        padding: 12px 10px 8px 10px;
+    }
+    .input-group.float-label label {
+        top: 12px;
+        left: 10px;
+        font-size: 0.9em;
+    }
+    .login-form button {
+        padding: 14px;
+        font-size: 1.1em;
+        border-radius: 8px;
+        box-shadow: 0 6px 15px rgba(237,28,36,0.3);
+    }
+    .login-container .signup-link {
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header.login-header .logo img {
+        height: 30px; /* Logo lebih kecil di mobile */
+    }
+    .login-container {
+        padding: 25px; /* Padding paling kecil di mobile */
+    }
+    .login-container h2 {
+        font-size: 1.6em; /* Judul lebih kecil */
+    }
+    .input-group.float-label input {
+        padding: 10px 8px 6px 8px;
+        font-size: 0.9em;
+    }
+    .input-group.float-label label {
+        top: 10px;
+        left: 8px;
+        font-size: 0.8em;
+    }
+    .login-form button {
+        padding: 10px;
+        font-size: 1em;
+    }
+}

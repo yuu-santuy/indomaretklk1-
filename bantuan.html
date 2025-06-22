@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="bantuan.css"> </head>
+<body>
+
+    <div id="menuOverlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="sidebarMenu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+        <h2>Menu Indomaret</h2>
+        <a href="index.html">🏠 Beranda</a>
+        <a href="kode_penukaran.html">📦 Kode Penukaran</a>
+        <a href="info_layanan.html">ℹ️ Info Layanan</a>
+        <a href="bantuan.html">❓ Bantuan</a> <a href="#">🛒 Keranjang Belanja</a>
+        <a href="promosi.html">🎁 Promo & Diskon</a>
+        <a href="#">⭐ Produk Favorit</a>
+        <a href="#">📍 Lokasi Toko</a>
+
+        <div class="sidebar-section-divider"></div>
+        <h2 class="sidebar-section-title">Pengaturan</h2>
+        <a href="#">⚙️ Edit Akun</a>
+        <a href="#">🎨 Tema</a>
+        <a href="#">🌐 Bahasa</a>
+        <a href="login.html" onclick="logout()">➡️ Logout</a>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+            <nav class="nav-icons">
+                <a href="login.html">
+                    👤 Akun
+                </a>
+                <a href="#" class="menu-icon" onclick="openMenu()">
+                    ☰ Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" placeholder="Cari pertanyaan atau topik bantuan...">
+            <button type="submit">Cari Bantuan</button>
+        </div>
+    </section>
+
+    <main class="main-content-bantuan">
+        <div class="container">
+            <h1>Pusat Bantuan Indomaret Online</h1>
+            <p>Kami di sini untuk membantu Anda! Temukan jawaban atas pertanyaan umum atau hubungi tim dukungan kami.</p>
+
+            <div class="faq-section">
+                <h2>Pertanyaan Umum (FAQ)</h2>
+                <div class="faq-item">
+                    <button class="faq-question">Bagaimana cara melakukan pemesanan?</button>
+                    <div class="faq-answer">
+                        <p>Untuk melakukan pemesanan, Anda bisa mengikuti langkah-langkah berikut:</p>
+                        <ol>
+                            <li>Pilih produk yang Anda inginkan.</li>
+                            <li>Tambahkan produk ke keranjang belanja.</li>
+                            <li>Lanjutkan ke halaman pembayaran.</li>
+                            <li>Pilih metode pembayaran dan pengiriman.</li>
+                            <li>Konfirmasi pesanan Anda.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Metode pembayaran apa saja yang tersedia?</button>
+                    <div class="faq-answer">
+                        <p>Kami menerima berbagai metode pembayaran, termasuk Kartu Kredit/Debit, Transfer Bank (Virtual Account), E-Wallet (OVO, GoPay, Dana, LinkAja), Pembayaran di Gerai Indomaret, dan COD (Cash On Delivery).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Bagaimana cara melacak pesanan saya?</button>
+                    <div class="faq-answer">
+                        <p>Anda bisa melacak pesanan Anda melalui halaman "Status Pesanan" di akun Anda setelah login. Nomor resi pengiriman juga akan dikirimkan melalui email.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Bagaimana jika produk yang saya terima rusak atau tidak sesuai?</button>
+                    <div class="faq-answer">
+                        <p>Jika Anda menerima produk yang rusak atau tidak sesuai, silakan hubungi tim layanan pelanggan kami dalam waktu 24 jam setelah penerimaan barang. Kami akan membantu proses pengembalian atau penukaran.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2>Hubungi Kami</h2>
+                <p>Tidak menemukan jawaban yang Anda cari? Jangan ragu untuk menghubungi tim dukungan pelanggan kami.</p>
+                <div class="contact-info">
+                    <p>📧 Email: <a href="mailto:support@indomaret.com">support@indomaret.com</a></p>
+                    <p>📞 Telepon: <a href="tel:+6280012345678">0800-1234-5678</a> (Bebas Pulsa)</p>
+                    <p>⏰ Jam Operasional: Setiap hari 24/7</p>
+                </div>
+                <button class="contact-button">Kirim Pesan Melalui Form</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebarMenu").style.width = "250px";
+            document.getElementById("menuOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebarMenu").style.width = "0";
+            document.getElementById("menuOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUserName');
+            window.location.href = 'login.html';
+            alert('Anda telah berhasil logout.');
+        }
+
+        // Script khusus untuk FAQ (Accordion)
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(button => {
+                button.addEventListener('click', () => {
+                    const faqItem = button.parentNode;
+                    faqItem.classList.toggle('active'); // Toggle class 'active'
+                    const answer = button.nextElementSibling; // Dapatkan elemen jawaban
+                    if (faqItem.classList.contains('active')) {
+                        answer.style.maxHeight = answer.scrollHeight + "px"; // Buka dengan tinggi penuh
+                    } else {
+                        answer.style.maxHeight = null; // Tutup
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

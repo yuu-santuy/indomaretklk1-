@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo & Diskon - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="promosi.css"> </head>
+<body>
+
+    <div id="menuOverlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="sidebarMenu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+        <h2>Menu Indomaret</h2>
+        <a href="index.html">🏠 Beranda</a>
+        <a href="#">📦 Kode Penukaran</a>
+        <a href="#">ℹ️ Info Layanan</a>
+        <a href="#">❓ Bantuan</a>
+        <a href="#">🛒 Keranjang Belanja</a>
+        <a href="promosi.html">🎁 Promo & Diskon</a> <a href="#">⭐ Produk Favorit</a>
+        <a href="#">📍 Lokasi Toko</a>
+
+        <div class="sidebar-section-divider"></div>
+        <h2 class="sidebar-section-title">Pengaturan</h2>
+        <a href="#">⚙️ Edit Akun</a>
+        <a href="#">🎨 Tema</a>
+        <a href="#">🌐 Bahasa</a>
+        <a href="login.html" onclick="logout()">➡️ Logout</a>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+            <nav class="nav-icons">
+                <a href="login.html">
+                    👤 Akun
+                </a>
+                <a href="#" class="menu-icon" onclick="openMenu()">
+                    ☰ Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" placeholder="Cari promo atau produk diskon...">
+            <button type="submit">Cari Promo</button>
+        </div>
+    </section>
+
+    <main class="main-content-promosi">
+        <div class="container">
+            <h1>Promo & Diskon Spesial!</h1>
+            <p>Temukan penawaran terbaik dari Indomaret hari ini.</p>
+
+            <div class="promo-grid">
+                <div class="promo-item">
+                    <img src="promo_susu.jpg" alt="Promo Susu">
+                    <h3>Diskon 20% Susu Segar</h3>
+                    <p>Berlaku hingga 30 Juni 2025.</p>
+                    <button class="promo-button">Lihat Detail</button>
+                </div>
+                <div class="promo-item">
+                    <img src="promo_makanan.jpg" alt="Promo Makanan Ringan">
+                    <h3>Beli 2 Gratis 1 Makanan Ringan</h3>
+                    <p>Khusus produk pilihan.</p>
+                    <button class="promo-button">Lihat Detail</button>
+                </div>
+                <div class="promo-item">
+                    <img src="promo_minyak.jpg" alt="Promo Minyak Goreng">
+                    <h3>Hemat Rp5.000 Minyak Goreng 2L</h3>
+                    <p>Stok terbatas!</p>
+                    <button class="promo-button">Lihat Detail</button>
+                </div>
+                <div class="promo-item">
+                    <img src="promo_deterjen.jpg" alt="Promo Deterjen">
+                    <h3>Cashback 10% Deterjen</h3>
+                    <p>Untuk pembelian minimal Rp50.000.</p>
+                    <button class="promo-button">Lihat Detail</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebarMenu").style.width = "250px";
+            document.getElementById("menuOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebarMenu").style.width = "0";
+            document.getElementById("menuOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUserName');
+            window.location.href = 'login.html';
+            alert('Anda telah berhasil logout.');
+        }
+    </script>
+</body>
+</html>

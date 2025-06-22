@@ -1,0 +1,230 @@
+/* keranjang_belanja.css */
+
+/* Konsistensi dengan index.css */
+body {
+    background-color: #f0f2f5; /* Latar belakang sama */
+}
+
+.main-content-keranjang {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.main-content-keranjang h1 {
+    color: #ED1C24; /* Warna Indomaret Red */
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+/* Gaya Pesan Keranjang Kosong */
+.empty-cart-message {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+.empty-cart-message p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.empty-cart-message a {
+    color: #004F9F; /* Biru Indomaret */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.empty-cart-message a:hover {
+    text-decoration: underline;
+}
+
+/* Gaya Item Keranjang */
+.cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    padding: 20px;
+    gap: 20px;
+    text-align: left;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0; /* Pastikan gambar tidak mengecil */
+}
+
+.cart-item .item-details {
+    flex-grow: 1;
+}
+
+.cart-item .item-details h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.3em;
+}
+
+.cart-item .item-details p {
+    margin: 0 0 10px 0;
+    color: #555;
+    font-size: 1em;
+}
+
+.cart-item .quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-item .quantity-control button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item .quantity-control button:hover {
+    background-color: #e0e0e0;
+}
+
+.cart-item .quantity-control span {
+    font-size: 1.1em;
+    font-weight: bold;
+    min-width: 25px; /* Pastikan ada ruang untuk angka */
+    text-align: center;
+}
+
+.cart-item .remove-item-button {
+    background-color: #dc3545; /* Merah untuk hapus */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item .remove-item-button:hover {
+    background-color: #c82333;
+}
+
+.cart-item .item-total {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #004F9F; /* Biru Indomaret */
+    margin-left: auto; /* Dorong ke kanan */
+    flex-shrink: 0;
+}
+
+/* Gaya Ringkasan Keranjang */
+.cart-summary {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    margin-top: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+}
+
+.cart-summary .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.cart-summary .total-row {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #ED1C24; /* Merah Indomaret */
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 20px;
+}
+
+.checkout-button {
+    background-color: #004F9F; /* Biru Indomaret */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 25px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #003e80; /* Biru lebih gelap saat hover */
+}
+
+/* Media Queries untuk responsivitas */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column; /* Susun vertikal di mobile */
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .cart-item img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+    }
+
+    .cart-item .item-details {
+        width: 100%;
+    }
+
+    .cart-item .item-total {
+        width: 100%;
+        text-align: right;
+        margin-top: 15px;
+    }
+
+    .cart-summary {
+        padding: 20px;
+        margin: 20px 20px 0 20px;
+    }
+
+    .search-bar input {
+        width: 80%;
+    }
+
+    .search-bar button {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 80%;
+    }
+
+    .search-bar .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-content-keranjang h1 {
+        font-size: 2em;
+    }
+}

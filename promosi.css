@@ -1,0 +1,107 @@
+/* promosi.css */
+
+/* Konsistensi dengan index.css */
+body {
+    background-color: #f0f2f5; /* Latar belakang sama */
+}
+
+.main-content-promosi {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.main-content-promosi h1 {
+    color: #ED1C24; /* Warna Indomaret Red */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.main-content-promosi p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Gaya Grid Promosi */
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsif */
+    gap: 30px; /* Jarak antar item */
+    margin-top: 30px;
+}
+
+.promo-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden; /* Pastikan gambar tidak keluar dari batas */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-bottom: 20px; /* Ruang di bawah tombol */
+}
+
+.promo-item:hover {
+    transform: translateY(-5px); /* Efek naik sedikit saat hover */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.promo-item img {
+    width: 100%;
+    height: 200px; /* Tinggi gambar tetap */
+    object-fit: cover; /* Pastikan gambar menutupi area tanpa terdistorsi */
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.promo-item h3 {
+    color: #004F9F; /* Warna Biru Indomaret */
+    font-size: 1.4em;
+    margin: 0 15px 10px;
+}
+
+.promo-item p {
+    color: #666;
+    font-size: 0.95em;
+    margin: 0 15px 20px;
+    line-height: 1.5;
+}
+
+.promo-item .promo-button {
+    background-color: #ED1C24; /* Merah Indomaret */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    display: block; /* Agar tombol memenuhi lebar item */
+    width: calc(100% - 30px); /* Kurangi padding samping */
+    margin: 0 15px; /* Pusatkan tombol */
+}
+
+.promo-item .promo-button:hover {
+    background-color: #C00F17; /* Merah lebih gelap saat hover */
+}
+
+/* Media Queries untuk responsivitas */
+@media (max-width: 768px) {
+    .promo-grid {
+        grid-template-columns: 1fr; /* Satu kolom di layar kecil */
+    }
+
+    .search-bar input {
+        width: 80%; /* Input pencarian lebih lebar di mobile */
+    }
+
+    .search-bar button {
+        margin-left: 0; /* Sesuaikan margin */
+        margin-top: 10px;
+        width: 80%; /* Tombol pencarian juga lebih lebar */
+    }
+
+    .search-bar .container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

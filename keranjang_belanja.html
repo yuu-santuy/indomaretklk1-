@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="keranjang_belanja.css"> </head>
+<body>
+
+    <div id="menuOverlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="sidebarMenu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+        <h2>Menu Indomaret</h2>
+        <a href="index.html">🏠 Beranda</a>
+        <a href="kode_penukaran.html">📦 Kode Penukaran</a>
+        <a href="info_layanan.html">ℹ️ Info Layanan</a>
+        <a href="bantuan.html">❓ Bantuan</a>
+        <a href="keranjang_belanja.html">🛒 Keranjang Belanja</a> <a href="promosi.html">🎁 Promo & Diskon</a>
+        <a href="#">⭐ Produk Favorit</a>
+        <a href="#">📍 Lokasi Toko</a>
+
+        <div class="sidebar-section-divider"></div>
+        <h2 class="sidebar-section-title">Pengaturan</h2>
+        <a href="#">⚙️ Edit Akun</a>
+        <a href="#">🎨 Tema</a>
+        <a href="#">🌐 Bahasa</a>
+        <a href="login.html" onclick="logout()">➡️ Logout</a>
+    </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+            <nav class="nav-icons">
+                <a href="login.html">
+                    👤 Akun
+                </a>
+                <a href="#" class="menu-icon" onclick="openMenu()">
+                    ☰ Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" placeholder="Cari produk di keranjang atau lainnya...">
+            <button type="submit">Cari</button>
+        </div>
+    </section>
+
+    <main class="main-content-keranjang">
+        <div class="container">
+            <h1>Keranjang Belanja Anda</h1>
+
+            <div id="cartItemsContainer">
+                <div class="empty-cart-message" id="emptyCartMessage">
+                    <p>Keranjang belanja Anda kosong. Yuk, <a href="index.html">mulai belanja sekarang!</a></p>
+                </div>
+            </div>
+
+            <div class="cart-summary" id="cartSummary" style="display: none;">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotalAmount">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Diskon:</span>
+                    <span id="discountAmount">Rp 0</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Total Pembayaran:</span>
+                    <span id="totalAmount">Rp 0</span>
+                </div>
+                <button class="checkout-button" onclick="checkout()">Lanjutkan ke Pembayaran</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebarMenu").style.width = "250px";
+            document.getElementById("menuOverlay").style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebarMenu").style.width = "0";
+            document.getElementById("menuOverlay").style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUserName');
+            window.location.href = 'login.html';
+            alert('Anda telah berhasil logout.');
+        }
+
+        // --- JavaScript Khusus Keranjang Belanja ---
+        let cart = []; // Array untuk menyimpan item di keranjang
+
+        // Fungsi untuk memuat item dari localStorage saat halaman dimuat
+        function loadCartFromLocalStorage() {
+            const storedCart = localStorage.getItem('indomaretCart');
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+            }
+            renderCart();
+        }
+
+        // Fungsi untuk menyimpan item ke localStorage
+        function saveCartToLocalStorage() {
+            localStorage.setItem('indomaretCart', JSON.stringify(cart));
+        }
+
+        // Fungsi untuk menambahkan item ke keranjang (simulasi)
+        // Di aplikasi nyata, ini akan dipanggil dari halaman produk
+        function addItemToCart(id, name, price, imageUrl, quantity = 1) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ id, name, price, imageUrl, quantity });
+            }
+            saveCartToLocalStorage();
+            renderCart();
+            alert(`${name} ditambahkan ke keranjang!`); // Notifikasi sederhana
+        }
+
+        // Fungsi untuk menghapus item dari keranjang
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCartToLocalStorage();
+            renderCart();
+        }
+
+        // Fungsi untuk memperbarui jumlah item
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeItem(id); // Hapus jika jumlah kurang dari atau sama dengan 0
+                } else {
+                    saveCartToLocalStorage();
+                    renderCart();
+                }
+            }
+        }
+
+        // Fungsi untuk merender/menampilkan keranjang
+        function renderCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const emptyMessage = document.getElementById('emptyCartMessage');
+            const summary = document.getElementById('cartSummary');
+            let subtotal = 0;
+            let total = 0;
+            let discount = 0; // Anda bisa menambahkan logika diskon di sini
+
+            container.innerHTML = ''; // Bersihkan konten sebelumnya
+
+            if (cart.length === 0) {
+                emptyMessage.style.display = 'block';
+                summary.style.display = 'none';
+            } else {
+                emptyMessage.style.display = 'none';
+                summary.style.display = 'block';
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    const cartItemDiv = document.createElement('div');
+                    cartItemDiv.classList.add('cart-item');
+                    cartItemDiv.innerHTML = `
+                        <img src="${item.imageUrl}" alt="${item.name}">
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p>Harga: Rp ${item.price.toLocaleString('id-ID')}</p>
+                            <div class="quantity-control">
+                                <button onclick="updateQuantity('${item.id}', -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.id}', 1)">+</button>
+                            </div>
+                            <button class="remove-item-button" onclick="removeItem('${item.id}')">Hapus</button>
+                        </div>
+                        <span class="item-total">Rp ${itemTotal.toLocaleString('id-ID')}</span>
+                    `;
+                    container.appendChild(cartItemDiv);
+                });
+
+                // Hitung total akhir
+                total = subtotal - discount; // Jika ada diskon
+
+                document.getElementById('subtotalAmount').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+                document.getElementById('discountAmount').textContent = `Rp ${discount.toLocaleString('id-ID')}`;
+                document.getElementById('totalAmount').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            }
+        }
+
+        // Fungsi simulasi checkout
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Keranjang belanja Anda kosong. Tambahkan produk sebelum checkout!');
+                return;
+            }
+            alert('Lanjutkan ke pembayaran! (Ini adalah simulasi checkout.)');
+            // Di sini Anda akan mengarahkan pengguna ke halaman pembayaran yang sebenarnya
+            // Atau memproses pesanan. Setelah itu, biasanya keranjang akan dikosongkan.
+            // cart = [];
+            // saveCartToLocalStorage();
+            // renderCart();
+            // window.location.href = 'halaman_pembayaran.html';
+        }
+
+        // Panggil saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', loadCartFromLocalStorage);
+
+        // Contoh bagaimana Anda bisa menambahkan item ke keranjang dari konsol browser
+        // atau dari halaman lain (misalnya halaman produk):
+        // addItemToCart('prod001', 'Mie Instan Goreng', 3000, 'path/to/mie.jpg');
+        // addItemToCart('prod002', 'Air Mineral 600ml', 5000, 'path/to/air.jpg', 2);
+    </script>
+</body>
+</html>
