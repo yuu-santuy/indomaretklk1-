@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indomaret Online (Contoh)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div id="menuOverlay" class="overlay" onclick="closeMenu()"></div>
+
+    <div id="sidebarMenu" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+        <h2>Menu Indomaret</h2>
+        <a href="index.html">🏠 Beranda</a>
+        <a href="#">📦 Kode Penukaran</a>
+        <a href="#">ℹ️ Info Layanan</a>
+        <a href="#">❓ Bantuan</a>
+        <a href="#">🛒 Keranjang Belanja</a>
+        <a href="#">⭐ Produk Favorit</a>
+        <a href="#">🎁 Promo & Diskon</a>
+        <a href="#">📍 Lokasi Toko</a>
+
+        <div class="sidebar-section-divider"></div>
+        <h2 class="sidebar-section-title">Pengaturan</h2>
+        <a href="#">⚙️ Edit Akun</a>
+        <a href="#">🎨 Tema</a>
+        <a href="#">🌐 Bahasa</a>
+        <a href="login.html" onclick="logout()">➡️ Logout</a> </div>
+
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+            <nav class="nav-icons">
+                <a href="login.html">
+                    👤 Akun
+                </a>
+               
+                <a href="#" class="menu-icon" onclick="openMenu()">
+                    ☰ Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="search-bar">
+        <div class="container">
+            <input type="text" placeholder="Cari produk di Indomaret...">
+            <button type="submit">Cari</button>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="container">
+            <h1>Selamat Datang di Indomaret Online!</h1>
+            <p>Ini adalah tampilan dasar halaman utama indoWeb Kelompok 1.</p>
+        </div>
+    </main>
+
+    <script>
+        function openMenu() {
+            document.getElementById("sidebarMenu").style.width = "250px"; // Lebar menu
+            document.getElementById("menuOverlay").style.display = "block"; // Tampilkan overlay
+            document.body.style.overflow = "hidden"; // Nonaktifkan scroll body
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebarMenu").style.width = "0"; // Tutup menu
+            document.getElementById("menuOverlay").style.display = "none"; // Sembunyikan overlay
+            document.body.style.overflow = "auto"; // Aktifkan kembali scroll body
+        }
+
+        // Fungsi untuk simulasi logout
+        function logout() {
+            // Hapus data pengguna dari localStorage (misalnya nama pengguna yang login)
+            localStorage.removeItem('loggedInUserName'); 
+            // Tambahkan logika lain yang mungkin diperlukan untuk logout (misalnya, menghapus token sesi)
+
+            // Redirect ke halaman login
+            window.location.href = 'login.html'; 
+            // Opsional: berikan pesan ke user bahwa logout berhasil
+            alert('Anda telah berhasil logout.');
+        }
+
+        // Jika Anda ingin tombol "Pengaturan" membuka sidebar menu yang sama,
+        // Anda bisa membuat fungsi ini memanggil openMenu()
+        function openSettingsMenu() {
+            openMenu(); // Panggil fungsi openMenu() untuk membuka sidebar
+            // Anda bisa tambahkan logika untuk secara otomatis menggulir ke bagian "Pengaturan" di sidebar jika sidebar sangat panjang
+        }
+    </script>
+</body>
+</html>

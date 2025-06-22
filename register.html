@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun Baru - Indomaret Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body class="login-page register-page"> <header class="header login-header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="indmrt.jpg" alt="Logo Indomaret">
+            </div>
+        </div>
+    </header>
+
+    <main class="login-split-content register-page-content"> <div class="login-form-area">
+            <div class="login-container">
+                <h2>Daftar Akun Baru</h2>
+                <form class="login-form" id="registerForm"> <div class="input-group float-label">
+                        <input type="text" id="fullname" name="fullname" required>
+                        <label for="fullname">Nama Lengkap</label>
+                    </div>
+                    <div class="input-group float-label">
+                        <input type="email" id="regEmail" name="regEmail" required>
+                        <label for="regEmail">Email</label>
+                    </div>
+                    <div class="input-group float-label">
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="^[0-9]+$" minlength="10" maxlength="15">
+                        <label for="phoneNumber">Nomor HP</label>
+                    </div>
+                    <div class="input-group float-label">
+                        <input type="password" id="regPassword" name="regPassword" required minlength="6">
+                        <label for="regPassword">Kata Sandi</label>
+                    </div>
+                    <div class="input-group float-label">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                        <label for="confirmPassword">Konfirmasi Kata Sandi</label>
+                    </div>
+                    <button type="submit">Daftar</button>
+                </form>
+                <div class="signup-link">
+                    Sudah punya akun? <a href="login.html">Masuk Sekarang</a>
+                </div>
+            </div>
+        </div>
+        </main>
+
+    <script>
+        // Efek paralaks pada form (bergerak sedikit saat mouse di atasnya)
+        const loginContainer = document.querySelector('.login-container');
+        if (loginContainer) {
+            loginContainer.addEventListener('mousemove', (e) => {
+                const rect = loginContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * 3;
+                const rotateY = ((x - centerX) / centerX) * -3;
+
+                loginContainer.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    scale(1)
+                `;
+            });
+
+            loginContainer.addEventListener('mouseleave', () => {
+                loginContainer.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        }
+
+        // Penanganan submit form registrasi
+        const registerForm = document.getElementById('registerForm');
+
+        if (registerForm) {
+            registerForm.addEventListener('submit', function(event) {
+                // Mencegah perilaku default submit form (refresh halaman)
+                event.preventDefault();
+
+                // Dapatkan nilai dari input fields
+                const fullname = document.getElementById('fullname').value; // Mengambil nama lengkap
+                const regEmail = document.getElementById('regEmail').value;
+                const phoneNumber = document.getElementById('phoneNumber').value;
+                const regPassword = document.getElementById('regPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                // --- Validasi Dasar (bisa diperluas) ---
+                if (regPassword !== confirmPassword) {
+                    alert('Konfirmasi Kata Sandi tidak cocok!');
+                    return; // Hentikan proses
+                }
+
+                if (!fullname || !regEmail || !phoneNumber || !regPassword || !confirmPassword) {
+                    alert('Mohon lengkapi semua kolom yang wajib diisi!');
+                    return; // Hentikan proses
+                }
+                
+                // --- Simulasi Proses Registrasi ---
+                // Di aplikasi nyata, data ini akan dikirim ke server (misalnya via AJAX/Fetch API)
+                alert('Registrasi berhasil! Anda akan diarahkan ke halaman login.'); 
+                
+                // --- PENTING: SIMPAN NAMA LENGKAP KE LOCAL STORAGE ---
+                localStorage.setItem('loggedInUserName', fullname); 
+
+                // Simulasikan penundaan sebelum redirect ke halaman login
+                setTimeout(() => {
+                    window.location.href = 'login.html'; // Redirect pengguna ke halaman login
+                }, 1000); // Redirect setelah 1 detik
+            });
+        }
+    </script>
+
+</body>
+</html>
